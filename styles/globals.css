@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.embla {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.embla__slide1 {
+  flex: 0 0 50%;
+  min-width: 0;
+}
+
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background-image: linear-gradient(to right, #fe4f70, #ffa387);
+  z-index: 100;
+  transform-origin: 0%;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}
