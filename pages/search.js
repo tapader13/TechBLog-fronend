@@ -14,7 +14,7 @@ const SearchPage = () => {
   useEffect(() => {
     const getCelebration = async (value) => {
       const res = await fetch(
-        `http://localhost:3001/api/blogapi?title=${value}`
+        `https://blog-frnt.vercel.app/api/blogapi?title=${value}`
       );
       if (!res.ok) {
         throw new Error(`Error: ${res.status} ${res.statusText}`);

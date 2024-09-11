@@ -18,7 +18,7 @@ const DetailsPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(
-        `http://localhost:3001/api/blogapi?title=${title}`
+        `https://blog-frnt.vercel.app/api/blogapi?title=${title}`
       );
 
       if (!res.ok) {

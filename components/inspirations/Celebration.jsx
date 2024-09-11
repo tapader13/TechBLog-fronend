@@ -17,7 +17,7 @@ export const Celebration = () => {
   useEffect(() => {
     const getCelebration = async (value) => {
       const res = await fetch(
-        `http://localhost:3001/api/blogapi?specificCategory=${value}`
+        `https://blog-frnt.vercel.app/api/blogapi?specificCategory=${value}`
       );
       if (!res.ok) {
         throw new Error(`Error: ${res.status} ${res.statusText}`);

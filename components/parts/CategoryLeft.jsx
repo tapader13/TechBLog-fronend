@@ -13,7 +13,7 @@ const CategoryLeft = ({ title }) => {
     const getCat = async (value) => {
       try {
         const res = await fetch(
-          `http://localhost:3001/api/blogapi?category=${value}`
+          `https://blog-frnt.vercel.app/api/blogapi?category=${value}`
         );
         if (!res.ok) {
           throw new Error(`Error: ${res.status} ${res.statusText}`);
