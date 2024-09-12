@@ -35,7 +35,7 @@ export const Inspiration = () => {
           {data &&
             data.map((item) => {
               return (
-                <div key={item.title} className='embla__slide1  p-2'>
+                <div key={item.title} className=' embla__slide  p-2'>
                   <div className='relative group min-h-[300px] rounded-xl overflow-hidden'>
                     <Image
                       src={getFirstImage(item.description) || '/asset 21.jpeg'}

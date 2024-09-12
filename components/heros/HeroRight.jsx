@@ -25,22 +25,24 @@ const HeroRight = () => {
     <div className='p-5  border border-[#ebebeb] rounded-xl'>
       <div className='flex justify-between gap-5'>
         <Button
+          hasGradient={selectedCategory === 'popular'}
           onClick={() => setSelectedCategory('popular')}
-          className={`${
+          className={`relative overflow-hidden ${
             selectedCategory === 'popular'
               ? 'bg-senary-gradient text-white'
               : 'bg-transparent text-quinary'
-          } text-[16px] font-medium px-12 py-[10px] shadow-none border`}
+          } text-[16px] group font-medium px-12 py-[10px] shadow-none border`}
         >
           Popular
         </Button>
         <Button
+          hasGradient={selectedCategory === 'recent'}
           onClick={() => setSelectedCategory('recent')}
-          className={`${
+          className={`relative overflow-hidden ${
             selectedCategory === 'recent'
               ? 'bg-senary-gradient text-white'
               : 'bg-transparent text-quinary'
-          } text-[16px] font-medium px-12 py-[10px] shadow-none border`}
+          } text-[16px] font-medium group px-12 py-[10px] shadow-none border`}
         >
           Recent
         </Button>

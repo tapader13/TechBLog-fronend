@@ -55,7 +55,7 @@ const SearchPart = () => {
               Press ESC to close
             </h1>
           </div>
-          <div className='flex items-center justify-center gap-3 w-full'>
+          <div className='flex flex-col sm:flex-row items-center justify-center gap-3 w-full'>
             <motion.input
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
@@ -65,7 +65,7 @@ const SearchPart = () => {
               onChange={(e) => setSearch(e.target.value)}
               onKeyDown={handleEnter}
               placeholder='Search and press enter...'
-              className='w-[40%] h-[50px] bg-white border border-gray-300 rounded-full py-[6px] px-5 text-xl focus:outline-none focus:ring-2 focus:ring-quaternary'
+              className='sm:w-[40%] h-[50px] bg-white border border-gray-300 rounded-full py-[6px] px-5 text-xl focus:outline-none focus:ring-2 focus:ring-quaternary'
             />
             <Button
               className='bg-senary-gradient text-white rounded-full py-4 px-10 text-xl'

@@ -2,11 +2,11 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
 const Card = () => {
   return (
-    <div className='grid gap-5 my-10 grid-cols-12 bg-septenary p-10 rounded-lg'>
-      <div className='col-span-3 overflow-hidden'>
+    <div className='grid gap-5 my-10 sm:grid-cols-12 grid-cols-1 bg-septenary p-10 rounded-lg'>
+      <div className='sm:col-span-3 overflow-hidden'>
         <img src={'/asset 26.jpeg'} className='rounded-full' alt='profile' />
       </div>
-      <div className='col-span-9'>
+      <div className='sm:col-span-9'>
         <h1 className='text-2xl font-poppins font-semibold text-tertiary'>
           Minhaj Tapader
         </h1>

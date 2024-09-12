@@ -46,8 +46,8 @@ const LatestLeft = () => {
         {data &&
           data.slice(0, visibleCount).map((item) => (
             <div key={item._id || item.title}>
-              <div className='grid grid-cols-12 gap-5'>
-                <div className='relative col-span-5'>
+              <div className='grid sm:grid-cols-12 grid-cols-1 gap-5'>
+                <div className='relative sm:col-span-5'>
                   <div className='relative group h-[260px] w-full rounded-xl overflow-hidden'>
                     <Image
                       src={getFirstImage(item.description) || '/asset 9.jpeg'}
@@ -60,8 +60,8 @@ const LatestLeft = () => {
                     </div>
                   </div>
                 </div>
-                <div className='col-span-7'>
-                  <div className='flex items-center gap-2 my-5'>
+                <div className='sm:col-span-7'>
+                  <div className='flex items-center flex-wrap gap-2 my-5'>
                     <div className='rounded-full overflow-hidden'>
                       <Image
                         src={'/asset 10.jpeg'}
@@ -71,7 +71,7 @@ const LatestLeft = () => {
                       />
                     </div>
                     <div className='text-quinary font-roboto cursor-pointer hover:text-quaternary transition-all duration-300'>
-                      Minhaj Tapader
+                      Minhaj
                     </div>
                     <div className='text-quaternary pr-1 text-2xl relative'>
                       <p className='absolute -top-5 left-0'>.</p>

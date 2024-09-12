@@ -4,8 +4,8 @@ import ScrollBtn from './buttons/ScrollBtn';
 
 const Footer = () => {
   return (
-    <div className='w-[80%] mx-auto'>
-      <div className='flex items-center justify-between py-8'>
+    <div className='sm:w-[80%] w-full mx-auto'>
+      <div className='flex flex-col sm:flex-row gap-5 items-center justify-between  py-8'>
         <div className='text-quinary font-roboto'>
           <h4>© 2023 Katen. Theme by ThemeGer.</h4>
         </div>

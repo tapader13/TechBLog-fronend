@@ -43,7 +43,7 @@ export const Celebration = () => {
             {data &&
               data.slice(0, 2).map((item) => {
                 return (
-                  <div key={item.title} className='embla__slide'>
+                  <div key={item.title} className='embla__slide1'>
                     <div className='relative mt-10 group h-[240px] w-full rounded-xl overflow-hidden '>
                       <Image
                         src={

@@ -41,8 +41,8 @@ const CategoryLeft = ({ title }) => {
       {data &&
         data.slice(0, visibleItems).map((item) => (
           <div key={item._id}>
-            <div className='grid grid-cols-12 gap-5'>
-              <div className='relative col-span-5'>
+            <div className='grid sm:grid-cols-12 grid-cols-1 gap-5'>
+              <div className='relative sm:col-span-5'>
                 <div className='relative group h-[240px] w-full rounded-xl overflow-hidden '>
                   <Image
                     src={getFirstImage(item.description) || '/asset 9.jpeg'}
@@ -55,7 +55,7 @@ const CategoryLeft = ({ title }) => {
                   </div>
                 </div>
               </div>
-              <div className='col-span-7'>
+              <div className='sm:col-span-7'>
                 <div className='flex items-center gap-2 my-5'>
                   <div className='rounded-full overflow-hidden'>
                     <Image

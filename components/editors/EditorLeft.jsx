@@ -35,7 +35,7 @@ const EditorLeft = () => {
         <img src='/asset 40.svg' alt='' />
       </div>
 
-      <div className='grid mt-10 grid-cols-2 gap-5 p-5 border border-[#ebebeb] rounded-xl'>
+      <div className='grid mt-10 sm:grid-cols-2 grid-cols-1 gap-5 p-5 border border-[#ebebeb] rounded-xl'>
         <div>
           <div className='relative group h-[260px] w-full rounded-xl overflow-hidden'>
             {data.length > 0 && (

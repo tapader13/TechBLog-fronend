@@ -18,12 +18,12 @@ const Tags = () => {
         </h1>
         <Breadcamp title={title} />
       </div>
-      <div className='w-[80%] mx-auto'>
-        <div className='grid grid-cols-12 gap-5 mt-10'>
-          <div className='col-span-8'>
+      <div className='sm:w-[80%] w-full mx-auto'>
+        <div className='grid sm:grid-cols-12 grid-cols-1 gap-5 mt-10'>
+          <div className='sm:col-span-8'>
             <TagLeft title={tagtitle} />
           </div>
-          <div className='col-span-4'>
+          <div className='sm:col-span-4'>
             <RightPart />
           </div>
         </div>

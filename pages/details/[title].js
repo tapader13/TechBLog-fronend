@@ -10,26 +10,43 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useRouter } from 'next/router';
 import RightPart from '@/components/parts/RightPart';
+import readingTime from 'reading-time';
+import Loader from '@/components/Loader';
 
 const DetailsPage = () => {
   const [blog, setBlog] = useState(null);
+  const [readTime, setReadTime] = useState('');
+  const [load, setLoad] = useState(true); // Initially set to true for loading
   const router = useRouter();
   const { title } = router.query;
+
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(
-        `https://blog-frnt.vercel.app/api/blogapi?title=${title}`
-      );
+      try {
+        setLoad(true); // Start loading
+        const res = await fetch(
+          `https://blog-frnt.vercel.app/api/blogapi?title=${title}`
+        );
+        if (!res.ok) {
+          throw new Error(`Error: ${res.status} ${res.statusText}`);
+        }
+        const data = await res.json();
+        setBlog(data[0]);
 
-      if (!res.ok) {
-        throw new Error(`Error: ${res.status} ${res.statusText}`);
+        // Calculate reading time and set it
+        const stats = readingTime(data[0]?.description || '');
+        setReadTime(stats.text); // e.g., "4 min read"
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoad(false); // Stop loading after fetch is complete
       }
-      const data = await res.json();
-      setBlog(data[0]);
     };
-    fetchData();
+    if (title) {
+      fetchData();
+    }
   }, [title]);
-  console.log(blog, 'blog');
+
   const Code = ({ node, inline, className, children, ...props }) => {
     const [copied, setCopied] = useState(false);
     const handleCopy = () => {
@@ -73,71 +90,100 @@ const DetailsPage = () => {
       return <code {...props}>{children}</code>;
     }
   };
-  console.log(blog, 'blog');
+
   return (
     <div>
-      <div className='w-[80%] mx-auto'>
+      <div className='sm:w-[80%] w-full mx-auto'>
         <Breadcamp title={title} />
-        <div className='grid grid-cols-12 gap-5 mt-10'>
-          <div className='col-span-8'>
-            <h1 className='text-4xl font-poppins text-tertiary font-bold'>
-              {/* {title
-                .split('-')
-                .map((c) => c.charAt(0).toUpperCase() + c.slice(1))
-                .join(' ')} */}
-              {title}
-            </h1>
-            <div className='flex items-center gap-3 my-5'>
-              <div className='rounded-full overflow-hidden'>
-                <Image src={'/asset 10.jpeg'} alt='' width={40} height={40} />
-              </div>
-              <div className='text-quinary font-roboto cursor-pointer hover:text-quaternary transition-all duration-300'>
-                Minhaj Tapader
-              </div>
-              <div className='text-quaternary pr-1 text-2xl relative'>
-                <p className='absolute -top-5  left-0'>.</p>
-              </div>
-              <div className='text-quinary font-roboto cursor-pointer hover:text-quaternary transition-all duration-300'>
-                <Link href={`/category/inspiration`}>Inspiration</Link>
-              </div>
-              <div className='text-quaternary pr-1 text-2xl relative'>
-                <p className='absolute -top-5  left-0'>.</p>
-              </div>
-              <div className='text-quinary font-roboto'>August 19, 2022</div>
-            </div>
-            <div className='prose w-full max-w-none'>
-              {blog && (
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  components={{ code: Code }}
-                >
-                  {blog.description}
-                </ReactMarkdown>
-              )}
-            </div>
-            <div className='border border-[#ebebeb] my-10' />
-            <div className='flex justify-end w-full gap-3 flex-wrap items-center '>
-              <Link href='/tags/html'>
-                <Button className='shadow-none bg-transparent text-quinary font-roboto border border-quinary px-3 py-1  hover:border-quaternary hover:text-quaternary transition-all duration-300 '>
-                  #html
-                </Button>
-              </Link>
-              <Button className='shadow-none bg-transparent text-quinary font-roboto border border-quinary px-3 py-1  hover:border-quaternary hover:text-quaternary transition-all duration-300 '>
-                #css
-              </Button>
-              <Button className='shadow-none bg-transparent text-quinary font-roboto border border-quinary px-3 py-1  hover:border-quaternary hover:text-quaternary transition-all duration-300 '>
-                #javascript
-              </Button>
-              <Button className='shadow-none bg-transparent text-quinary font-roboto border border-quinary px-3 py-1  hover:border-quaternary hover:text-quaternary transition-all duration-300 '>
-                #react
-              </Button>
-              <Button className='shadow-none bg-transparent text-quinary font-roboto border border-quinary px-3 py-1  hover:border-quaternary hover:text-quaternary transition-all duration-300 '>
-                #nextjs
-              </Button>
-            </div>
-            <Card />
+        <div className='grid sm:grid-cols-12 grid-cols-1 gap-5 mt-10'>
+          <div className='sm:col-span-8 p-2'>
+            {/* Show loading spinner or message */}
+            {load ? (
+              <Loader />
+            ) : (
+              <>
+                <h1 className='text-4xl font-poppins text-tertiary font-bold'>
+                  {title}
+                </h1>
+                <div className='flex items-center flex-wrap gap-3 my-5'>
+                  <div className='rounded-full overflow-hidden'>
+                    <Image
+                      src={'/asset 10.jpeg'}
+                      alt=''
+                      width={40}
+                      height={40}
+                    />
+                  </div>
+                  <div className='text-quinary font-roboto cursor-pointer hover:text-quaternary transition-all duration-300'>
+                    Minhaj Tapadar
+                  </div>
+                  <div className='text-quaternary pr-1 text-2xl relative'>
+                    <p className='absolute -top-5  left-0'>.</p>
+                  </div>
+                  <div className='text-quinary font-roboto cursor-pointer hover:text-quaternary transition-all duration-300'>
+                    <Link href={`/category/inspiration`}>Inspiration</Link>
+                  </div>
+                  <div className='text-quaternary pr-1 text-2xl relative'>
+                    <p className='absolute -top-5  left-0'>.</p>
+                  </div>
+                  <div className='text-quinary font-roboto'>
+                    August 19, 2022
+                  </div>
+                  <div className='text-quaternary pr-1 text-2xl relative'>
+                    <p className='absolute -top-5  left-0'>.</p>
+                  </div>
+                  {/* Display reading time */}
+                  {readTime && (
+                    <div className='text-quinary font-roboto ml-0'>
+                      {readTime}
+                    </div>
+                  )}
+                </div>
+                <div className='prose w-full max-w-none'>
+                  {blog && (
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      components={{ code: Code }}
+                    >
+                      {blog.description}
+                    </ReactMarkdown>
+                  )}
+                </div>
+                <div className='border border-[#ebebeb] my-10' />
+                <div className='flex justify-end w-full gap-3 flex-wrap items-center '>
+                  <Link href='/tags/Web Development'>
+                    <Button className='shadow-none bg-transparent text-quinary font-roboto border border-quinary px-3 py-1  hover:border-quaternary hover:text-quaternary transition-all duration-300 '>
+                      #Web Development
+                    </Button>
+                  </Link>
+                  <Link href='/tags/Front End'>
+                    <Button className='shadow-none bg-transparent text-quinary font-roboto border border-quinary px-3 py-1  hover:border-quaternary hover:text-quaternary transition-all duration-300 '>
+                      #Front End
+                    </Button>
+                  </Link>
+                  <Link href='/tags/Back End'>
+                    <Button className='shadow-none bg-transparent text-quinary font-roboto border border-quinary px-3 py-1  hover:border-quaternary hover:text-quaternary transition-all duration-300 '>
+                      #Back End
+                    </Button>
+                  </Link>
+
+                  <Link href='/tags/Full Stack'>
+                    <Button className='shadow-none bg-transparent text-quinary font-roboto border border-quinary px-3 py-1  hover:border-quaternary hover:text-quaternary transition-all duration-300 '>
+                      #Full Stack
+                    </Button>
+                  </Link>
+
+                  <Link href='/tags/Database'>
+                    <Button className='shadow-none bg-transparent text-quinary font-roboto border border-quinary px-3 py-1  hover:border-quaternary hover:text-quaternary transition-all duration-300 '>
+                      #Database
+                    </Button>
+                  </Link>
+                </div>
+                <Card />
+              </>
+            )}
           </div>
-          <div className='col-span-4'>
+          <div className='sm:col-span-4'>
             <RightPart />
           </div>
         </div>

@@ -18,7 +18,7 @@ const TrandingBottom = () => {
     getEditorPick('trending');
   }, []);
   return (
-    <div className='grid grid-cols-2 grid-rows-2 gap-x-10'>
+    <div className='grid sm:grid-cols-2 grid-cols-1 grid-rows-2 gap-x-10'>
       {data &&
         data.length >= 4 &&
         data.slice(2, 6).map((item) => {
