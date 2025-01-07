@@ -12,13 +12,13 @@ module.exports = {
         primary: '#ffffff',
         secondary: '#142030',
         tertiary: '#203656',
-        quaternary: '#fe4f70',
+        quaternary: '#6EA8FF',
         quinary: '#8F9BAD',
         senary: '#ffffff99',
         septenary: '#F1F8FF',
       },
       backgroundImage: {
-        'senary-gradient': 'linear-gradient(to right, #fe4f70, #ffa387)',
+        'senary-gradient': 'linear-gradient(to right, #4C8CFF, #82C7FF)',
         'senary-gradient-hover': 'linear-gradient(to left, #fe4f70, #ffa387)',
       },
       fontFamily: {

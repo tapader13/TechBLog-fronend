@@ -25,7 +25,7 @@ const DetailsPage = () => {
       try {
         setLoad(true); // Start loading
         const res = await fetch(
-          `https://blog-frnt.vercel.app/api/blogapi?title=${title}`
+          `http://localhost:3000/api/blogapi?title=${title}`
         );
         if (!res.ok) {
           throw new Error(`Error: ${res.status} ${res.statusText}`);
