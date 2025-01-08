@@ -90,11 +90,12 @@ const DetailsPage = () => {
           }
         );
         if (response.data.success) {
-          if (response.data.message === 'Post disliked successfully!') {
-            setDislikes(response?.data?.userId);
+          if (response.data.message === 'Blog disliked successfully!') {
+            setDislikes(response?.data?.blog?._id, response?.data?.userId);
           }
-          if (response.data.message === 'Post liked successfully!') {
-            setLikes(response?.data?.userId);
+          if (response.data.message === 'Blog liked successfully!') {
+            console.log(response?.data?.blog?._id, response?.data?.userId);
+            setLikes(response?.data?.blog?._id, response?.data?.userId);
             // dispatch(setLikes({ user: user._id, postId: id }));
           }
           // toast({
@@ -156,7 +157,10 @@ const DetailsPage = () => {
       return <code {...props}>{children}</code>;
     }
   };
-  // console.log(view, 1);
+  console.log(singleBlog, 345);
+  const blogLike =
+    singleBlog && blog ? singleBlog.find((blg) => blg._id === blog._id) : null;
+  console.log(blogLike, 3451);
   return (
     <div>
       <div className='sm:w-[80%] w-full mx-auto'>
@@ -226,7 +230,7 @@ const DetailsPage = () => {
                     className='flex items-center gap-2'
                     onClick={handleLike}
                   >
-                    <span>{singleBlog?.likes?.length}</span>
+                    <span>{blogLike?.likes?.length}</span>
                     <span>Likes</span>
                   </Button>
                 </div>

@@ -2,6 +2,8 @@ import Image from 'next/image';
 import { Roboto, Poppins } from 'next/font/google';
 import LeftPart from '@/components/parts/LeftPart';
 import RightPart from '@/components/parts/RightPart';
+import useBlogStore from '@/store/useBlogStore';
+import { useEffect } from 'react';
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -16,6 +18,16 @@ const poppins = Poppins({
 });
 
 export default function Home() {
+  const { setBlogs } = useBlogStore();
+  useEffect(() => {
+    fetch('http://localhost:3000/api/allblogapi')
+      .then((res) => res.json())
+      .then((data) => {
+        setBlogs(data);
+        console.log('Blog fetched', data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <div className={`${roboto.variable} ${poppins.variable} antialiased `}>
       <div className='sm:w-[80%] w-full mx-auto'>
