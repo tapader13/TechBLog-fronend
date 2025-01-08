@@ -28,9 +28,11 @@ const Header = () => {
           </div>
           <div>
             <ul className='sm:flex hidden items-center gap-2 text-quinary font-poppins '>
-              <li className='cursor-pointer py-2 px-5 bg-senary-gradient rounded-full text-white'>
-                Home
-              </li>
+              <Link href={'/'}>
+                <li className='cursor-pointer py-2 px-5 bg-senary-gradient rounded-full text-white'>
+                  Home
+                </li>
+              </Link>
               {/* <li className='cursor-pointer py-2 px-5 hover:text-tertiary transition-all duration-300 '>
                 About
               </li> */}
