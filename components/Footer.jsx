@@ -7,7 +7,7 @@ const Footer = () => {
     <div className='sm:w-[80%] w-full mx-auto'>
       <div className='flex flex-col sm:flex-row gap-5 items-center justify-between  py-8'>
         <div className='text-quinary font-roboto'>
-          <h4>© 2023 Katen. Theme by ThemeGer.</h4>
+          <h4>© {new Date().getFullYear()}. All rights reserved.</h4>
         </div>
         <div className='flex items-center gap-5'>
           <FaFacebook className='text-xl cursor-pointer text-tertiary transition-all duration-300' />
