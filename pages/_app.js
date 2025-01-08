@@ -6,11 +6,13 @@ import '@/styles/globals.css';
 
 export default function App({ Component, pageProps }) {
   return (
-    <AuthContext>
-      <ScrollEffect />
-      <Header />
-      <Component {...pageProps} />
-      <Footer />
-    </AuthContext>
+    <>
+      <AuthContext>
+        <ScrollEffect />
+        <Header />
+        <Component {...pageProps} />
+        <Footer />
+      </AuthContext>
+    </>
   );
 }

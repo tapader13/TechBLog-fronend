@@ -178,6 +178,12 @@ const DetailsPage = () => {
                     </ReactMarkdown>
                   )}
                 </div>
+                <div className='mt-5'>
+                  <Button className='flex items-center gap-2'>
+                    <span>0</span>
+                    <span>Likes</span>
+                  </Button>
+                </div>
                 <div className='border border-[#ebebeb] my-10' />
                 <div className='flex justify-end w-full gap-3 flex-wrap items-center '>
                   <Link href='/tags/Web Development'>
