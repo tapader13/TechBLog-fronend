@@ -115,10 +115,7 @@ const DetailsPage = () => {
       }
     }
   };
-  const hasLiked =
-    blog &&
-    singleBlog?.find((blg) => blg._id === blog._id)?.likes?.includes(user?._id);
-  console.log(hasLiked, 231);
+
   const Code = ({ node, inline, className, children, ...props }) => {
     const [copied, setCopied] = useState(false);
     const handleCopy = () => {
@@ -231,23 +228,13 @@ const DetailsPage = () => {
                   )}
                 </div>
                 <div className='mt-5'>
-                  {hasLiked ? (
-                    <Button
-                      className='flex items-center gap-2'
-                      onClick={handleLike}
-                    >
-                      <span>{blogLike?.likes?.length}</span>
-                      <span>Likes</span>
-                    </Button>
-                  ) : (
-                    <span
-                      className='flex cursor-pointer items-center gap-2'
-                      onClick={handleLike}
-                    >
-                      <span>{blogLike?.likes?.length}</span>
-                      <span>Likes</span>
-                    </span>
-                  )}
+                  <Button
+                    className='flex items-center gap-2'
+                    onClick={handleLike}
+                  >
+                    <span>{blogLike?.likes?.length}</span>
+                    <span>Likes</span>
+                  </Button>
                 </div>
                 <div className='border border-[#ebebeb] my-10' />
                 <div className='flex justify-end w-full gap-3 flex-wrap items-center '>
