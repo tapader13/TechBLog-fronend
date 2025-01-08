@@ -12,8 +12,10 @@ import { useRouter } from 'next/router';
 import RightPart from '@/components/parts/RightPart';
 import readingTime from 'reading-time';
 import Loader from '@/components/Loader';
+import useAuth from '@/hooks/useAuth';
 
 const DetailsPage = () => {
+  const { user } = useAuth();
   const [blog, setBlog] = useState(null);
   const [readTime, setReadTime] = useState('');
   const [load, setLoad] = useState(true);
@@ -70,6 +72,13 @@ const DetailsPage = () => {
     };
     setViews();
   }, [blog]);
+
+  const handleLike = () => {
+    if (!user) {
+      router.push('/login');
+    }
+    console.log(123456);
+  };
   const Code = ({ node, inline, className, children, ...props }) => {
     const [copied, setCopied] = useState(false);
     const handleCopy = () => {
@@ -113,7 +122,7 @@ const DetailsPage = () => {
       return <code {...props}>{children}</code>;
     }
   };
-  console.log(view, 1);
+  // console.log(view, 1);
   return (
     <div>
       <div className='sm:w-[80%] w-full mx-auto'>
@@ -179,7 +188,10 @@ const DetailsPage = () => {
                   )}
                 </div>
                 <div className='mt-5'>
-                  <Button className='flex items-center gap-2'>
+                  <Button
+                    className='flex items-center gap-2'
+                    onClick={handleLike}
+                  >
                     <span>0</span>
                     <span>Likes</span>
                   </Button>
