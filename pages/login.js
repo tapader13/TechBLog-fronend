@@ -1,14 +1,24 @@
 'use client';
 import useAuth from '@/hooks/useAuth';
 import { useState } from 'react';
-
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 const Login = () => {
-  const { googleLogin } = useAuth();
-
+  const { googleLogin, user } = useAuth();
+  const router = useRouter();
   const handleLogin = () => {
     googleLogin()
-      .then((result) => {
-        console.log(result);
+      .then(async (result) => {
+        try {
+          const res = await axios.post('http://localhost:3000/api/authapi', {
+            username: result.user.displayName,
+            email: result.user.email,
+            image: result.user.photoURL,
+          });
+          if (res?.data?.success) {
+            router.push('/');
+          }
+        } catch (error) {}
       })
       .catch((error) => {
         console.log(error);
