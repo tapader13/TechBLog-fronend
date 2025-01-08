@@ -16,7 +16,8 @@ import Loader from '@/components/Loader';
 const DetailsPage = () => {
   const [blog, setBlog] = useState(null);
   const [readTime, setReadTime] = useState('');
-  const [load, setLoad] = useState(true); // Initially set to true for loading
+  const [load, setLoad] = useState(true);
+  const [view, setView] = useState('');
   const router = useRouter();
   const { title } = router.query;
 
@@ -42,11 +43,33 @@ const DetailsPage = () => {
         setLoad(false); // Stop loading after fetch is complete
       }
     };
+
     if (title) {
       fetchData();
     }
   }, [title]);
-
+  useEffect(() => {
+    const setViews = async () => {
+      if (!blog?._id) return;
+      try {
+        const res = await fetch(`http://localhost:3000/api/viewsapi`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id: blog._id }),
+        });
+        if (!res.ok) {
+          throw new Error(`Error: ${res.status} ${res.statusText}`);
+        }
+        const data = await res.json();
+        setView(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    setViews();
+  }, [blog]);
   const Code = ({ node, inline, className, children, ...props }) => {
     const [copied, setCopied] = useState(false);
     const handleCopy = () => {
@@ -90,7 +113,7 @@ const DetailsPage = () => {
       return <code {...props}>{children}</code>;
     }
   };
-
+  console.log(view, 1);
   return (
     <div>
       <div className='sm:w-[80%] w-full mx-auto'>
