@@ -161,6 +161,12 @@ const DetailsPage = () => {
                       {readTime}
                     </div>
                   )}
+                  <div className='text-quaternary pr-1 text-2xl relative'>
+                    <p className='absolute -top-5  left-0'>.</p>
+                  </div>
+                  <div className='text-quinary font-roboto'>
+                    {view?.blog?.views} views
+                  </div>
                 </div>
                 <div className='prose w-full max-w-none'>
                   {blog && (
