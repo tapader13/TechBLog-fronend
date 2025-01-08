@@ -13,6 +13,8 @@ import RightPart from '@/components/parts/RightPart';
 import readingTime from 'reading-time';
 import Loader from '@/components/Loader';
 import useAuth from '@/hooks/useAuth';
+import useBlogStore from '@/store/useBlogStore';
+import axios from 'axios';
 
 const DetailsPage = () => {
   const { user } = useAuth();
@@ -72,13 +74,45 @@ const DetailsPage = () => {
     };
     setViews();
   }, [blog]);
-
-  const handleLike = () => {
+  const { setLikes, setDislikes, singleBlog } = useBlogStore();
+  const handleLike = async () => {
     if (!user) {
       router.push('/login');
+    } else {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/api/likedislikeapi`,
+          {
+            params: {
+              userEmail: user.email,
+              id: blog._id,
+            },
+          }
+        );
+        if (response.data.success) {
+          if (response.data.message === 'Post disliked successfully!') {
+            setDislikes(response?.data?.userId);
+          }
+          if (response.data.message === 'Post liked successfully!') {
+            setLikes(response?.data?.userId);
+            // dispatch(setLikes({ user: user._id, postId: id }));
+          }
+          // toast({
+          //   variant: 'success',
+          //   description: `${response.data.message}`,
+          // });
+          console.log(response.data.message, 222);
+        }
+      } catch (error) {
+        console.log(error, 333);
+        // toast({
+        //   variant: 'destructive',
+        //   description: `${error.response.data.message}`,
+        // });
+      }
     }
-    console.log(123456);
   };
+
   const Code = ({ node, inline, className, children, ...props }) => {
     const [copied, setCopied] = useState(false);
     const handleCopy = () => {
@@ -192,7 +226,7 @@ const DetailsPage = () => {
                     className='flex items-center gap-2'
                     onClick={handleLike}
                   >
-                    <span>0</span>
+                    <span>{singleBlog?.likes?.length}</span>
                     <span>Likes</span>
                   </Button>
                 </div>
