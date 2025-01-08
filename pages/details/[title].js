@@ -15,7 +15,7 @@ import Loader from '@/components/Loader';
 import useAuth from '@/hooks/useAuth';
 import useBlogStore from '@/store/useBlogStore';
 import axios from 'axios';
-
+import toast from 'react-hot-toast';
 const DetailsPage = () => {
   const { user } = useAuth();
   const [blog, setBlog] = useState(null);
@@ -92,10 +92,12 @@ const DetailsPage = () => {
         if (response.data.success) {
           if (response.data.message === 'Blog disliked successfully!') {
             setDislikes(response?.data?.blog?._id, response?.data?.userId);
+            toast.success(response.data.message);
           }
           if (response.data.message === 'Blog liked successfully!') {
             console.log(response?.data?.blog?._id, response?.data?.userId);
             setLikes(response?.data?.blog?._id, response?.data?.userId);
+            toast.success(response.data.message);
             // dispatch(setLikes({ user: user._id, postId: id }));
           }
           // toast({
@@ -113,7 +115,10 @@ const DetailsPage = () => {
       }
     }
   };
-
+  const hasLiked =
+    blog &&
+    singleBlog?.find((blg) => blg._id === blog._id)?.likes?.includes(user?._id);
+  console.log(hasLiked, 231);
   const Code = ({ node, inline, className, children, ...props }) => {
     const [copied, setCopied] = useState(false);
     const handleCopy = () => {
@@ -226,13 +231,23 @@ const DetailsPage = () => {
                   )}
                 </div>
                 <div className='mt-5'>
-                  <Button
-                    className='flex items-center gap-2'
-                    onClick={handleLike}
-                  >
-                    <span>{blogLike?.likes?.length}</span>
-                    <span>Likes</span>
-                  </Button>
+                  {hasLiked ? (
+                    <Button
+                      className='flex items-center gap-2'
+                      onClick={handleLike}
+                    >
+                      <span>{blogLike?.likes?.length}</span>
+                      <span>Likes</span>
+                    </Button>
+                  ) : (
+                    <span
+                      className='flex cursor-pointer items-center gap-2'
+                      onClick={handleLike}
+                    >
+                      <span>{blogLike?.likes?.length}</span>
+                      <span>Likes</span>
+                    </span>
+                  )}
                 </div>
                 <div className='border border-[#ebebeb] my-10' />
                 <div className='flex justify-end w-full gap-3 flex-wrap items-center '>
