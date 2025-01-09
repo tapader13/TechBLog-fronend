@@ -33,19 +33,25 @@ const Header = () => {
                   Home
                 </li>
               </Link>
-              {/* <li className='cursor-pointer py-2 px-5 hover:text-tertiary transition-all duration-300 '>
-                About
-              </li> */}
-              {/* <li className='cursor-pointer py-2 px-5 hover:text-tertiary transition-all duration-300 '>
-                Services
-              </li> */}
+
               {user && (
+                <li className='cursor-pointer py-2 px-5 hover:text-tertiary transition-all duration-300 '>
+                  Favorite
+                </li>
+              )}
+              {user ? (
                 <li
                   onClick={handleLogout}
                   className='cursor-pointer rounded-full py-2 px-5 hover:text-tertiary hover:bg-senary-gradient transition-all duration-300 '
                 >
                   Logout
                 </li>
+              ) : (
+                <Link href={'/login'}>
+                  <li className='cursor-pointer rounded-full py-2 px-5 hover:text-tertiary hover:bg-senary-gradient transition-all duration-300 '>
+                    Login
+                  </li>
+                </Link>
               )}
             </ul>
           </div>

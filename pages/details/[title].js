@@ -16,6 +16,7 @@ import useAuth from '@/hooks/useAuth';
 import useBlogStore from '@/store/useBlogStore';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { CiHeart, CiBookmark } from 'react-icons/ci';
 const DetailsPage = () => {
   const { user } = useAuth();
   const [blog, setBlog] = useState(null);
@@ -163,6 +164,30 @@ const DetailsPage = () => {
   const blogLike =
     singleBlog && blog ? singleBlog.find((blg) => blg._id === blog._id) : null;
   console.log(blogLike, 3451);
+  const handleBookmark = async () => {
+    if (!user) {
+      router.push('/login');
+    } else {
+      try {
+        const response = await axios.post(
+          `http://localhost:3000/api/favoriteapi`,
+          {
+            userEmail: user?.email,
+            blogId: blog._id,
+          }
+        );
+        if (response.data.success) {
+          toast.success(response?.data?.message);
+        }
+      } catch (error) {
+        console.log(error, 333);
+        toast({
+          variant: 'destructive',
+          description: `${error.response.data.message}`,
+        });
+      }
+    }
+  };
   return (
     <div>
       <div className='sm:w-[80%] w-full mx-auto'>
@@ -227,13 +252,21 @@ const DetailsPage = () => {
                     </ReactMarkdown>
                   )}
                 </div>
-                <div className='mt-5'>
+                <div className='mt-5 flex justify-between'>
                   <Button
                     className='flex items-center gap-2'
                     onClick={handleLike}
                   >
+                    <span>
+                      <CiHeart />
+                    </span>
                     <span>{blogLike?.likes?.length}</span>
-                    <span>Likes</span>
+                  </Button>
+                  <Button
+                    onClick={handleBookmark}
+                    className='flex items-center gap-2'
+                  >
+                    <CiBookmark />
                   </Button>
                 </div>
                 <div className='border border-[#ebebeb] my-10' />
