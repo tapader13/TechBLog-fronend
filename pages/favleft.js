@@ -4,6 +4,8 @@ import { FaVideo } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
 import { getDate, getFirstImage, getFirstWords } from '@/lib/constant';
 import useAuth from '@/hooks/useAuth';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const FavLeft = ({ title }) => {
   const [data, setData] = useState([]);
@@ -37,10 +39,21 @@ const FavLeft = ({ title }) => {
       setLoading(false);
     }, 500); // Simulate a small delay for loading
   };
-
+  const handleDelete = async (id) => {
+    console.log(id);
+    const res = await axios.delete(
+      `http://localhost:3000/api/favoriteapi?id=${id}&email=${user.email}`
+    );
+    if (res?.data?.success) {
+      toast.success(res.data?.message);
+      const updatedData = data.filter((fav) => fav?.blog?._id !== id);
+      setData(updatedData);
+    }
+  };
   return (
     <div className='border border-[#ebebeb] p-5 rounded-xl'>
       {data &&
+        data.length > 0 &&
         data?.slice(0, visibleItems).map((item) => {
           //   const { item } = fav;
           console.log(item?.blog, 234);
@@ -89,6 +102,14 @@ const FavLeft = ({ title }) => {
                       {getDate(item?.blog?.createdAt)}
                     </div>
                   </div>
+                  <div>
+                    <Button
+                      onClick={() => handleDelete(item?.blog?._id)}
+                      className='bg-red-600 text-white'
+                    >
+                      Remove
+                    </Button>
+                  </div>
                   <h1 className='text-tertiary font-poppins hover:text-quaternary transition-all duration-300 font-bold text-2xl cursor-pointer'>
                     {item?.blog?.title.slice(0, 1).toUpperCase() +
                       item?.blog?.title.slice(1)}
@@ -102,7 +123,7 @@ const FavLeft = ({ title }) => {
             </div>
           );
         })}
-
+      {data && data.length <= 0 && <h6>No Favorite Blog</h6>}
       <div className='flex justify-center'>
         <Button
           className='bg-transparent text-quinary font-roboto border border-senary px-10 py-3  hover:border-quaternary hover:text-quaternary transition-all duration-300'

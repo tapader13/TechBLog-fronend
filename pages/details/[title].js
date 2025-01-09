@@ -181,10 +181,7 @@ const DetailsPage = () => {
         }
       } catch (error) {
         console.log(error, 333);
-        toast({
-          variant: 'destructive',
-          description: `${error.response.data.message}`,
-        });
+        toast.error(error.response.data.message);
       }
     }
   };
