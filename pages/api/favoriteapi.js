@@ -40,6 +40,23 @@ export default async function handler(req, res) {
     res
       .status(200)
       .json({ success: true, favBlogs, message: 'fav blog fetch' });
+  } else if (req.method === 'DELETE') {
+    await connectDb();
+    const data = req.query;
+    const findUser = await User.findOne({ email: data.email });
+    const findFavBlog = await Favorite.findOneAndDelete({
+      user: findUser._id,
+      blog: data.id,
+    });
+    if (!findFavBlog) {
+      return res
+        .status(404)
+        .json({ success: false, message: 'Blog not found in favorite' });
+    }
+    res.status(200).json({
+      success: true,
+      message: 'favorite successfully deleted',
+    });
   } else {
     res.status(405).json({ message: 'method not allowed' });
   }
