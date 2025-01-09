@@ -35,9 +35,11 @@ const Header = () => {
               </Link>
 
               {user && (
-                <li className='cursor-pointer py-2 px-5 hover:text-tertiary transition-all duration-300 '>
-                  Favorite
-                </li>
+                <Link href={'/favorite'}>
+                  <li className='cursor-pointer py-2 px-5 hover:text-tertiary transition-all duration-300 '>
+                    Favorite
+                  </li>
+                </Link>
               )}
               {user ? (
                 <li

@@ -25,6 +25,21 @@ export default async function handler(req, res) {
       message: 'favorite successfully created',
       favBlog,
     });
+  } else if (req.method === 'GET') {
+    await connectDb();
+    console.log(req.query.email, 12);
+    const findUser = await User.findOne({ email: req.query.email });
+    if (!findUser) {
+      return res
+        .status(404)
+        .json({ success: false, message: 'User not found' });
+    }
+    const favBlogs = await Favorite.find({ user: findUser._id }).populate(
+      'blog'
+    );
+    res
+      .status(200)
+      .json({ success: true, favBlogs, message: 'fav blog fetch' });
   } else {
     res.status(405).json({ message: 'method not allowed' });
   }
