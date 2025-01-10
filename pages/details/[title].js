@@ -188,10 +188,10 @@ const DetailsPage = () => {
   };
   return (
     <div>
-      <div className='sm:w-[80%] w-full mx-auto'>
+      <div className='lg:w-[80%] w-full mx-auto'>
         <Breadcamp title={title} />
-        <div className='grid sm:grid-cols-12 grid-cols-1 gap-5 mt-10'>
-          <div className='sm:col-span-8 p-2'>
+        <div className='grid lg:grid-cols-12 grid-cols-1 gap-5 mt-10'>
+          <div className='lg:col-span-8 p-2'>
             {/* Show loading spinner or message */}
             {load ? (
               <Loader />
@@ -310,7 +310,7 @@ const DetailsPage = () => {
               </>
             )}
           </div>
-          <div className='sm:col-span-4'>
+          <div className='lg:col-span-4'>
             <RightPart />
           </div>
         </div>
