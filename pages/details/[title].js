@@ -203,7 +203,7 @@ const DetailsPage = () => {
                 <div className='flex items-center flex-wrap gap-3 my-5'>
                   <div className='rounded-full overflow-hidden'>
                     <Image
-                      src={'/asset 10.jpeg'}
+                      src={'/msg-4064874077-2204 (1).jpg'}
                       alt=''
                       width={40}
                       height={40}

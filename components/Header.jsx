@@ -60,10 +60,27 @@ const Header = () => {
         </div>
         <div className='flex items-center gap-7'>
           <div className='sm:flex hidden items-center gap-5'>
-            <FaFacebook className='text-xl cursor-pointer text-tertiary transition-all duration-300' />
-            <FaInstagram className='text-xl cursor-pointer text-tertiary transition-all duration-300' />
-            <FaLinkedin className=' text-xl cursor-pointer text-tertiary transition-all duration-300' />
-            <FaTwitter className=' text-xl cursor-pointer text-tertiary transition-all duration-300' />
+            <a
+              href='https://www.facebook.com/muhammad.minhaj.799316'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <FaFacebook className='text-xl cursor-pointer text-tertiary transition-all duration-300' />
+            </a>
+            <a
+              href='https://www.linkedin.com/in/minhaj-uddin-5b1a20338/'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <FaLinkedin className=' text-xl cursor-pointer text-tertiary transition-all duration-300' />
+            </a>
+            <a
+              href='https://x.com/MinhajTapader'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <FaTwitter className=' text-xl cursor-pointer text-tertiary transition-all duration-300' />
+            </a>
           </div>
           <div className='flex items-center gap-3'>
             <SearchPart />
