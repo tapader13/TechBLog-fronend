@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { Button } from '../ui/button';
 import { useEffect, useState } from 'react';
 import { getDate, getFirstImage } from '@/lib/constant';
+import Link from 'next/link';
 
 const HeroRight = () => {
   const [data, setData] = useState([]);
@@ -50,27 +51,29 @@ const HeroRight = () => {
       <div>
         {data.slice(0, 4).map((item, i) => {
           return (
-            <div
-              key={i}
-              className='grid grid-cols-12 gap-4 py-5 border-b border-[#ebebeb]'
-            >
-              <div className='col-span-3 w-[70px] relative h-[70px] overflow-hidden rounded-full'>
-                <Image
-                  fill
-                  src={getFirstImage(item.description) || '/asset 6.jpeg'}
-                  alt=''
-                  className=' hover:scale-110 h-full w-full cursor-pointer transition-all duration-300'
-                />
+            <Link href={`/details/${item?.title}`}>
+              <div
+                key={i}
+                className='grid grid-cols-12 gap-4 py-5 border-b border-[#ebebeb]'
+              >
+                <div className='col-span-3 w-[70px] relative h-[70px] overflow-hidden rounded-full'>
+                  <Image
+                    fill
+                    src={getFirstImage(item.description) || '/asset 6.jpeg'}
+                    alt=''
+                    className=' hover:scale-110 h-full w-full cursor-pointer transition-all duration-300'
+                  />
+                </div>
+                <div className='col-span-9'>
+                  <h3 className='text-tertiary font-poppins font-bold text-[18px] hover:text-quaternary transition-all duration-300 cursor-pointer'>
+                    {item.title}
+                  </h3>
+                  <p className='font-roboto text-quinary'>
+                    {getDate(item.createdAt)}
+                  </p>
+                </div>
               </div>
-              <div className='col-span-9'>
-                <h3 className='text-tertiary font-poppins font-bold text-[18px] hover:text-quaternary transition-all duration-300 cursor-pointer'>
-                  {item.title}
-                </h3>
-                <p className='font-roboto text-quinary'>
-                  {getDate(item.createdAt)}
-                </p>
-              </div>
-            </div>
+            </Link>
           );
         })}
       </div>

@@ -58,7 +58,12 @@ const EditorLeft = () => {
 
           <div className='flex items-center gap-2 my-5'>
             <div className='rounded-full overflow-hidden'>
-              <Image src='/asset 10.jpeg' alt='' width={40} height={40} />
+              <Image
+                src='/msg-4064874077-2204 (1).jpg'
+                alt=''
+                width={40}
+                height={40}
+              />
             </div>
             <div className='text-quinary font-roboto'>Minhaj Tapader</div>
             <div className='text-quaternary pr-1 text-2xl relative'>
@@ -86,7 +91,7 @@ const EditorLeft = () => {
           {data.length > 1 &&
             data.slice(1, 5).map((item) => {
               return (
-                <Link href={`details/${item.title}`}>
+                <Link href={`/details/${item.title}`}>
                   <div
                     key={item.title}
                     className='grid grid-cols-12 gap-4 pb-5 border-b border-[#ebebeb]'
@@ -103,7 +108,9 @@ const EditorLeft = () => {
                     </div>
                     <div className='col-span-8'>
                       <h3 className='text-tertiary font-poppins hover:text-quaternary transition-all duration-300 font-bold text-[18px] cursor-pointer'>
-                        {item.title}
+                        {item.title.length > 40
+                          ? item.title.slice(0, 40) + '...'
+                          : item.title}
                       </h3>
                       <p className='font-roboto text-quinary'>
                         {getDate(item.createdAt)}

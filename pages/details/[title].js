@@ -17,6 +17,7 @@ import useBlogStore from '@/store/useBlogStore';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { CiHeart, CiBookmark } from 'react-icons/ci';
+import { getFirstImage, getRemainingContent } from '@/lib/constant';
 const DetailsPage = () => {
   const { user } = useAuth();
   const [blog, setBlog] = useState(null);
@@ -240,12 +241,21 @@ const DetailsPage = () => {
                   </div>
                 </div>
                 <div className='prose w-full max-w-none'>
+                  <div className='col-span-4 rounded-lg w-full relative h-[350px] overflow-hidden'>
+                    <Image
+                      src={getFirstImage(blog?.description) || '/asset 12.jpeg'}
+                      alt=''
+                      fill
+                      className='hover:scale-110 cursor-pointer transition-all duration-300'
+                    />
+                  </div>
                   {blog && (
                     <ReactMarkdown
                       remarkPlugins={[remarkGfm]}
                       components={{ code: Code }}
                     >
-                      {blog.description}
+                      {getRemainingContent(blog.description)}
+                      {/* {blog.description} */}
                     </ReactMarkdown>
                   )}
                 </div>
