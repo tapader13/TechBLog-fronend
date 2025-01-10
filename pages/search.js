@@ -47,8 +47,7 @@ const SearchPage = () => {
                         <div className='relative group h-[220px] sm:h-[420px] w-full rounded-xl overflow-hidden '>
                           <Image
                             src={
-                              getFirstImage(data[0].description) ||
-                              '/asset 9.jpeg'
+                              getFirstImage(item.description) || '/asset 9.jpeg'
                             }
                             alt='hero'
                             fill
@@ -57,19 +56,22 @@ const SearchPage = () => {
                           <div className='absolute p-5 bottom-0 left-0 w-full h-full '>
                             <Button>
                               {' '}
-                              {data[0].category[0].slice(0, 1).toUpperCase() +
-                                data[0].category[0].slice(1)}
+                              {item.category[0].slice(0, 1).toUpperCase() +
+                                item.category[0].slice(1)}
                             </Button>
                           </div>
                         </div>
                         <div className='absolute p-5 -bottom-10 right-0'>
-                          <FaVideo className='p-[10px] h-12 w-12  bg-senary-gradient rounded-full cursor-pointer text-white transition-all duration-300' />
+                          <img
+                            src={getFirstImage(item.description)}
+                            className='p-[5px] h-12 w-12  bg-senary-gradient rounded-full cursor-pointer text-white transition-all duration-300'
+                          />
                         </div>
                       </div>
                       <div className='flex items-center flex-wrap sm:px-10 gap-2 my-5 '>
                         <div className='rounded-full overflow-hidden'>
                           <Image
-                            src={'/asset 10.jpeg'}
+                            src={'/msg-4064874077-2204 (1).jpg'}
                             alt=''
                             width={40}
                             height={40}
@@ -82,14 +84,14 @@ const SearchPage = () => {
                           <p className='absolute -top-5  left-0'>.</p>
                         </div>
                         <div className='text-quinary font-roboto'>
-                          {getDate(data[0].createdAt)}
+                          {getDate(item.createdAt)}
                         </div>
                       </div>
                       <h1 className='text-tertiary sm:px-10 font-poppins hover:text-quaternary transition-all duration-300 font-bold text-3xl cursor-pointer'>
                         {item.title}
                       </h1>
                       <p className='text-quinary font-roboto my-4 tracking-wide sm:px-10 mb-10'>
-                        {getFirstWords(data[0].description)}
+                        {getFirstWords(item.description)}
                       </p>
                       <div className='border mx-10 border-[#ebebeb] ' />
                       <div className='text-right sm:px-10 my-6 group'>
