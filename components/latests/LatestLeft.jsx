@@ -13,7 +13,7 @@ const LatestLeft = () => {
     const getLatestPosts = async () => {
       setIsLoading(true);
       const res = await fetch(
-        `http://localhost:3000/api/blogapi?specificCategory=latest`
+        `https://blog-frnt.vercel.app/api/blogapi?specificCategory=latest`
       );
       if (!res.ok) {
         throw new Error(`Error: ${res.status} ${res.statusText}`);
