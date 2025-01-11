@@ -17,14 +17,15 @@ const FavLeft = ({ title }) => {
   const [data, setData] = useState([]);
   const [visibleItems, setVisibleItems] = useState(2);
   const [loading, setLoading] = useState(false);
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   useEffect(() => {
     const getCat = async (value) => {
+      if (authLoading || !user?.email) return;
       try {
         await delay(1000);
         const res = await fetch(
-          `http://localhost:3000/api/favoriteapi?email=${user.email}`
+          `http://localhost:3000/api/favoriteapi?email=${user?.email}`
         );
         if (!res.ok) {
           throw new Error(`Error: ${res.status} ${res.statusText}`);
@@ -37,8 +38,11 @@ const FavLeft = ({ title }) => {
       }
     };
     getCat(title);
-  }, [title]);
+  }, [title, authLoading, user?.email]);
   console.log(data[0]?.blog, 'tag');
+  if (authLoading) {
+    return <div>Loading...</div>;
+  }
   // Function to load more items
   const loadMore = () => {
     setLoading(true);
