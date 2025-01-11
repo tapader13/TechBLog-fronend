@@ -32,7 +32,7 @@ const DetailsPage = () => {
       try {
         setLoad(true); // Start loading
         const res = await fetch(
-          `http://localhost:3000/api/blogapi?title=${title}`
+          `https://blog-frnt.vercel.app/api/blogapi?title=${title}`
         );
         if (!res.ok) {
           throw new Error(`Error: ${res.status} ${res.statusText}`);
@@ -58,7 +58,7 @@ const DetailsPage = () => {
     const setViews = async () => {
       if (!blog?._id) return;
       try {
-        const res = await fetch(`http://localhost:3000/api/viewsapi`, {
+        const res = await fetch(`https://blog-frnt.vercel.app/api/viewsapi`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ const DetailsPage = () => {
     } else {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/likedislikeapi`,
+          `https://blog-frnt.vercel.app/api/likedislikeapi`,
           {
             params: {
               userEmail: user.email,
@@ -171,7 +171,7 @@ const DetailsPage = () => {
     } else {
       try {
         const response = await axios.post(
-          `http://localhost:3000/api/favoriteapi`,
+          `https://blog-frnt.vercel.app/api/favoriteapi`,
           {
             userEmail: user?.email,
             blogId: blog._id,
