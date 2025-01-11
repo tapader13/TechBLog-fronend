@@ -123,7 +123,11 @@ const FavLeft = ({ title }) => {
                     </div>
                     <div>
                       <Button
-                        onClick={() => handleDelete(item?.blog?._id)}
+                        onClick={() => {
+                          e.stopPropagation(); // Prevent navigation
+                          e.preventDefault();
+                          handleDelete(item?.blog?._id);
+                        }}
                         className='bg-red-600 text-white'
                       >
                         Remove
