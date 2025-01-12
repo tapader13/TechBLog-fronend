@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { getFirstImage, getDate } from '@/lib/constant';
+import Link from 'next/link';
 
 const Popular = () => {
   const [data, setData] = useState([]);
@@ -28,34 +29,36 @@ const Popular = () => {
       {data &&
         data.slice(0, 3).map((item) => {
           return (
-            <div
-              key={item.title}
-              className='grid grid-cols-12 gap-4 py-5 border-b border-[#ebebeb]'
-            >
-              <div className='col-span-3 h-[70px] w-[70px] relative'>
-                {/* Image Container */}
-                <div className='h-[70px] relative w-[70px] rounded-full overflow-hidden'>
-                  <Image
-                    src={getFirstImage(item.description) || '/asset 6.jpeg'}
-                    alt=''
-                    fill
-                    className='hover:scale-110 cursor-pointer transition-all duration-300 rounded-full '
-                  />
+            <Link href={`/details/${item.title}`} key={item._id}>
+              <div
+                key={item.title}
+                className='grid grid-cols-12 gap-4 py-5 border-b border-[#ebebeb]'
+              >
+                <div className='col-span-3 h-[70px] w-[70px] relative'>
+                  {/* Image Container */}
+                  <div className='h-[70px] relative w-[70px] rounded-full overflow-hidden'>
+                    <Image
+                      src={getFirstImage(item.description) || '/asset 6.jpeg'}
+                      alt=''
+                      fill
+                      className='hover:scale-110 cursor-pointer transition-all duration-300 rounded-full '
+                    />
+                  </div>
+                  {/* Notification Icon */}
+                  <div className='absolute -top-1 -left-1 h-6 w-6 bg-quaternary text-white text-xs flex items-center justify-center rounded-full font-extrabold border-2 border-white'>
+                    1
+                  </div>
                 </div>
-                {/* Notification Icon */}
-                <div className='absolute -top-1 -left-1 h-6 w-6 bg-quaternary text-white text-xs flex items-center justify-center rounded-full font-extrabold border-2 border-white'>
-                  1
+                <div className='col-span-9'>
+                  <h3 className='text-tertiary font-poppins font-bold text-[18px] hover:text-quaternary transition-all duration-300 cursor-pointer'>
+                    {item.title}
+                  </h3>
+                  <p className='font-roboto text-quinary'>
+                    {getDate(item.createdAt)}
+                  </p>
                 </div>
               </div>
-              <div className='col-span-9'>
-                <h3 className='text-tertiary font-poppins font-bold text-[18px] hover:text-quaternary transition-all duration-300 cursor-pointer'>
-                  {item.title}
-                </h3>
-                <p className='font-roboto text-quinary'>
-                  {getDate(item.createdAt)}
-                </p>
-              </div>
-            </div>
+            </Link>
           );
         })}
     </div>
