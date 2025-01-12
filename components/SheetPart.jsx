@@ -11,6 +11,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import useAuth from '@/hooks/useAuth';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 import {
   FaBars,
   FaFacebook,
@@ -20,6 +23,13 @@ import {
 } from 'react-icons/fa';
 
 export function SheetPart() {
+  const { user, logoutUser } = useAuth();
+  const router = useRouter();
+  const handleLogout = () => {
+    logoutUser();
+    toast.success('Logout Successfully');
+    router.push('/login');
+  };
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -32,7 +42,28 @@ export function SheetPart() {
               <li className='cursor-pointer py-2 px-5 bg-senary-gradient rounded-full text-white'>
                 Home
               </li>
-              <li className='cursor-pointer py-2 px-5 hover:text-tertiary transition-all duration-300 '>
+              {user && (
+                <Link href={'/favorite'}>
+                  <li className='cursor-pointer py-2 px-5 hover:text-tertiary transition-all duration-300 '>
+                    Favorite
+                  </li>
+                </Link>
+              )}
+              {user ? (
+                <li
+                  onClick={handleLogout}
+                  className='cursor-pointer rounded-full py-2 px-5 hover:text-tertiary hover:bg-senary-gradient transition-all duration-300 '
+                >
+                  Logout
+                </li>
+              ) : (
+                <Link href={'/login'}>
+                  <li className='cursor-pointer rounded-full py-2 px-5 hover:text-tertiary hover:bg-senary-gradient transition-all duration-300 '>
+                    Login
+                  </li>
+                </Link>
+              )}
+              {/* <li className='cursor-pointer py-2 px-5 hover:text-tertiary transition-all duration-300 '>
                 About
               </li>
               <li className='cursor-pointer py-2 px-5 hover:text-tertiary transition-all duration-300 '>
@@ -40,7 +71,7 @@ export function SheetPart() {
               </li>
               <li className='cursor-pointer py-2 px-5 hover:text-tertiary transition-all duration-300 '>
                 Contact
-              </li>
+              </li> */}
             </ul>
           </div>
         </SheetClose>
