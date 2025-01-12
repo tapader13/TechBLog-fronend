@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { Button } from '../ui/button';
 import { getDate, getFirstImage } from '@/lib/constant';
+import Link from 'next/link';
 
 export const Inspiration = () => {
   const [emblaRef] = useEmblaCarousel();
@@ -10,7 +11,7 @@ export const Inspiration = () => {
   useEffect(() => {
     const getCelebration = async (value) => {
       const res = await fetch(
-        `https://blog-frnt.vercel.app/api/blogapi?specificCategory=${value}`
+        `http://localhost:3000/api/blogapi?specificCategory=${value}`
       );
       if (!res.ok) {
         throw new Error(`Error: ${res.status} ${res.statusText}`);
@@ -36,26 +37,30 @@ export const Inspiration = () => {
             data.map((item) => {
               return (
                 <div key={item.title} className=' embla__slide  p-2'>
-                  <div className='relative group min-h-[300px] rounded-xl overflow-hidden'>
-                    <Image
-                      src={getFirstImage(item.description) || '/asset 21.jpeg'}
-                      alt='hero'
-                      fill
-                      className='group-hover:scale-110 transition-all duration-500'
-                    />
-                    <div className='absolute p-5 bottom-0 flex flex-col justify-end left-0 w-full h-full bg-tertiary/60'>
-                      <Button>Politic</Button>
-                      <h1 className='text-white text-2xl font-bold my-5 font-poppins'>
-                        {item.title.slice(0, 1).toUpperCase() +
-                          item.title.slice(1)}
-                      </h1>
-                      <div className='flex items-center gap-2 text-senary font-roboto'>
-                        <h4>Minhaj Tapadar</h4>
-                        <h4>.</h4>
-                        <h4>{getDate(item.createdAt)}</h4>
+                  <Link href={`/details/${item.title}`}>
+                    <div className='relative group min-h-[300px] rounded-xl overflow-hidden'>
+                      <Image
+                        src={
+                          getFirstImage(item.description) || '/asset 21.jpeg'
+                        }
+                        alt='hero'
+                        fill
+                        className='group-hover:scale-110 transition-all duration-500'
+                      />
+                      <div className='absolute p-5 bottom-0 flex flex-col justify-end left-0 w-full h-full bg-tertiary/60'>
+                        <Button>{item.category}</Button>
+                        <h1 className='text-white text-2xl font-bold my-5 font-poppins'>
+                          {item.title.slice(0, 1).toUpperCase() +
+                            item.title.slice(1)}
+                        </h1>
+                        <div className='flex items-center gap-2 text-senary font-roboto'>
+                          <h4>Minhaj Tapadar</h4>
+                          <h4>.</h4>
+                          <h4>{getDate(item.createdAt)}</h4>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 </div>
               );
             })}

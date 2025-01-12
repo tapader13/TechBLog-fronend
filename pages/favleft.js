@@ -25,7 +25,7 @@ const FavLeft = ({ title }) => {
       try {
         await delay(1000);
         const res = await fetch(
-          `https://blog-frnt.vercel.app/api/favoriteapi?email=${user?.email}`
+          `http://localhost:3000/api/favoriteapi?email=${user?.email}`
         );
         if (!res.ok) {
           throw new Error(`Error: ${res.status} ${res.statusText}`);
@@ -54,7 +54,7 @@ const FavLeft = ({ title }) => {
   const handleDelete = async (id) => {
     console.log(id);
     const res = await axios.delete(
-      `https://blog-frnt.vercel.app/api/favoriteapi?id=${id}&email=${user.email}`
+      `http://localhost:3000/api/favoriteapi?id=${id}&email=${user.email}`
     );
     if (res?.data?.success) {
       toast.success(res.data?.message);
@@ -123,7 +123,7 @@ const FavLeft = ({ title }) => {
                     </div>
                     <div>
                       <Button
-                        onClick={() => {
+                        onClick={(e) => {
                           e.stopPropagation(); // Prevent navigation
                           e.preventDefault();
                           handleDelete(item?.blog?._id);

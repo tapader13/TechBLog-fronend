@@ -4,6 +4,7 @@ import { Button } from '../ui/button';
 import useEmblaCarousel from 'embla-carousel-react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { getDate, getFirstImage } from '@/lib/constant';
+import Link from 'next/link';
 export const Celebration = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [data, setData] = useState([]);
@@ -17,7 +18,7 @@ export const Celebration = () => {
   useEffect(() => {
     const getCelebration = async (value) => {
       const res = await fetch(
-        `https://blog-frnt.vercel.app/api/blogapi?specificCategory=${value}`
+        `http://localhost:3000/api/blogapi?specificCategory=${value}`
       );
       if (!res.ok) {
         throw new Error(`Error: ${res.status} ${res.statusText}`);
@@ -43,34 +44,36 @@ export const Celebration = () => {
             {data &&
               data.slice(0, 2).map((item) => {
                 return (
-                  <div key={item.title} className='embla__slide1'>
-                    <div className='relative mt-10 group h-[240px] w-full rounded-xl overflow-hidden '>
-                      <Image
-                        src={
-                          getFirstImage(item.description) || '/asset 29.jpeg'
-                        }
-                        alt='hero'
-                        fill
-                        className='group-hover:scale-110 transition-all duration-500'
-                      />
-                      <div className='absolute p-5 bottom-0 left-0 w-full h-full '>
-                        <Button>
-                          {' '}
-                          {item.category[0].slice(0, 1).toUpperCase() +
-                            item.category[0].slice(1)}
-                        </Button>
+                  <Link key={item._id} href={`/details/${item.title}`}>
+                    <div key={item.title} className='embla__slide1'>
+                      <div className='relative mt-10 group h-[240px] w-full rounded-xl overflow-hidden '>
+                        <Image
+                          src={
+                            getFirstImage(item.description) || '/asset 29.jpeg'
+                          }
+                          alt='hero'
+                          fill
+                          className='group-hover:scale-110 transition-all duration-500'
+                        />
+                        <div className='absolute p-5 bottom-0 left-0 w-full h-full '>
+                          <Button>
+                            {' '}
+                            {item.category[0].slice(0, 1).toUpperCase() +
+                              item.category[0].slice(1)}
+                          </Button>
+                        </div>
+                      </div>
+                      <h1 className='text-tertiary font-poppins hover:text-quaternary transition-all duration-300 font-bold text-xl my-4 cursor-pointer'>
+                        {item.title.slice(0, 1).toUpperCase() +
+                          item.title.slice(1)}
+                      </h1>
+                      <div className='flex text-sm items-center gap-2 text-quinary font-roboto'>
+                        <h4>Minhaj Tapadar</h4>
+                        <h4>.</h4>
+                        <h4> {getDate(item.createdAt)}</h4>
                       </div>
                     </div>
-                    <h1 className='text-tertiary font-poppins hover:text-quaternary transition-all duration-300 font-bold text-xl my-4 cursor-pointer'>
-                      {item.title.slice(0, 1).toUpperCase() +
-                        item.title.slice(1)}
-                    </h1>
-                    <div className='flex text-sm items-center gap-2 text-quinary font-roboto'>
-                      <h4>Minhaj Tapadar</h4>
-                      <h4>.</h4>
-                      <h4> {getDate(item.createdAt)}</h4>
-                    </div>
-                  </div>
+                  </Link>
                 );
               })}
             {/* <div className='embla__slide'>

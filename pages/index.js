@@ -20,7 +20,7 @@ const poppins = Poppins({
 export default function Home() {
   const { setBlogs } = useBlogStore();
   useEffect(() => {
-    fetch('https://blog-frnt.vercel.app/api/allblogapi')
+    fetch('http://localhost:3000/api/allblogapi')
       .then((res) => res.json())
       .then((data) => {
         setBlogs(data);

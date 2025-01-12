@@ -14,7 +14,7 @@ const TagLeft = ({ title }) => {
     const getCat = async (value) => {
       try {
         const res = await fetch(
-          `https://blog-frnt.vercel.app/api/blogapi?tag=${value}`
+          `http://localhost:3000/api/blogapi?tag=${value}`
         );
         if (!res.ok) {
           throw new Error(`Error: ${res.status} ${res.statusText}`);

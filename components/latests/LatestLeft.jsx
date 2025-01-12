@@ -2,7 +2,13 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { FaVideo } from 'react-icons/fa';
 import { Button } from '../ui/button';
-import { getDate, getFirstImage, getFirstWords } from '@/lib/constant';
+import {
+  getDate,
+  getFirstImage,
+  getFirstImage1,
+  getFirstWords,
+} from '@/lib/constant';
+import Link from 'next/link';
 
 const LatestLeft = () => {
   const [data, setData] = useState([]);
@@ -13,7 +19,7 @@ const LatestLeft = () => {
     const getLatestPosts = async () => {
       setIsLoading(true);
       const res = await fetch(
-        `https://blog-frnt.vercel.app/api/blogapi?specificCategory=latest`
+        `http://localhost:3000/api/blogapi?specificCategory=latest`
       );
       if (!res.ok) {
         throw new Error(`Error: ${res.status} ${res.statusText}`);
@@ -45,58 +51,65 @@ const LatestLeft = () => {
       <div className='border border-[#ebebeb] p-5 rounded-xl mt-8'>
         {data &&
           data.slice(0, visibleCount).map((item) => (
-            <div key={item._id || item.title}>
-              <div className='grid sm:grid-cols-12 grid-cols-1 gap-5'>
-                <div className='relative sm:col-span-5'>
-                  <div className='relative group h-[260px] w-full rounded-xl overflow-hidden'>
-                    <Image
-                      src={getFirstImage(item.description) || '/asset 9.jpeg'}
-                      alt='hero'
-                      fill
-                      className='group-hover:scale-110 transition-all duration-500'
-                    />
-                    <div className='absolute p-5 bottom-0 left-0 w-full h-full'>
-                      <FaVideo className='p-[10px] h-10 w-10 bg-senary-gradient rounded-full cursor-pointer text-white transition-all duration-300' />
-                    </div>
-                  </div>
-                </div>
-                <div className='sm:col-span-7'>
-                  <div className='flex items-center flex-wrap gap-2 my-5'>
-                    <div className='rounded-full overflow-hidden'>
+            <Link href={`/details/${item.title}`}>
+              <div key={item._id || item.title}>
+                <div className='grid sm:grid-cols-12 grid-cols-1 gap-5'>
+                  <div className='relative sm:col-span-5'>
+                    <div className='relative group h-[260px] w-full rounded-xl overflow-hidden'>
                       <Image
-                        src={'/asset 10.jpeg'}
-                        alt=''
-                        width={40}
-                        height={40}
+                        src={getFirstImage(item.description) || '/asset 9.jpeg'}
+                        alt='hero'
+                        fill
+                        className='group-hover:scale-110 transition-all duration-500'
                       />
-                    </div>
-                    <div className='text-quinary font-roboto cursor-pointer hover:text-quaternary transition-all duration-300'>
-                      Minhaj
-                    </div>
-                    <div className='text-quaternary pr-1 text-2xl relative'>
-                      <p className='absolute -top-5 left-0'>.</p>
-                    </div>
-                    <div className='text-quinary font-roboto cursor-pointer hover:text-quaternary transition-all duration-300'>
-                      {item.category[0].slice(0, 1).toUpperCase() +
-                        item.category[0].slice(1)}
-                    </div>
-                    <div className='text-quaternary pr-1 text-2xl relative'>
-                      <p className='absolute -top-5 left-0'>.</p>
-                    </div>
-                    <div className='text-quinary font-roboto'>
-                      {getDate(item.createdAt)}
+                      <div className='absolute p-5 bottom-0 left-0 w-full h-full'>
+                        <img
+                          src={
+                            getFirstImage1(item?.description) || '/asset 9.jpeg'
+                          }
+                          className='p-[5px] h-12 w-12  bg-senary-gradient rounded-full cursor-pointer text-white transition-all duration-300'
+                        />
+                      </div>
                     </div>
                   </div>
-                  <h1 className='text-tertiary font-poppins hover:text-quaternary transition-all duration-300 font-bold text-2xl cursor-pointer'>
-                    {item.title}
-                  </h1>
-                  <p className='text-quinary font-roboto my-4 tracking-wide'>
-                    {getFirstWords(item.description)}
-                  </p>
+                  <div className='sm:col-span-7'>
+                    <div className='flex items-center flex-wrap gap-2 my-5'>
+                      <div className='rounded-full overflow-hidden'>
+                        <Image
+                          src={'/msg-4064874077-2204 (1).jpg'}
+                          alt=''
+                          width={40}
+                          height={40}
+                        />
+                      </div>
+                      <div className='text-quinary font-roboto cursor-pointer hover:text-quaternary transition-all duration-300'>
+                        Minhaj
+                      </div>
+                      <div className='text-quaternary pr-1 text-2xl relative'>
+                        <p className='absolute -top-5 left-0'>.</p>
+                      </div>
+                      <div className='text-quinary font-roboto cursor-pointer hover:text-quaternary transition-all duration-300'>
+                        {item.category[0].slice(0, 1).toUpperCase() +
+                          item.category[0].slice(1)}
+                      </div>
+                      <div className='text-quaternary pr-1 text-2xl relative'>
+                        <p className='absolute -top-5 left-0'>.</p>
+                      </div>
+                      <div className='text-quinary font-roboto'>
+                        {getDate(item.createdAt)}
+                      </div>
+                    </div>
+                    <h1 className='text-tertiary font-poppins hover:text-quaternary transition-all duration-300 font-bold text-2xl cursor-pointer'>
+                      {item.title}
+                    </h1>
+                    <p className='text-quinary font-roboto my-4 tracking-wide'>
+                      {getFirstWords(item.description)}
+                    </p>
+                  </div>
                 </div>
+                <div className='border border-[#ebebeb] my-6' />
               </div>
-              <div className='border border-[#ebebeb] my-6' />
-            </div>
+            </Link>
           ))}
         <div className='flex justify-center'>
           <Button

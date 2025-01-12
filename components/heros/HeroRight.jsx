@@ -9,7 +9,7 @@ const HeroRight = () => {
   const [selectedCategory, setSelectedCategory] = useState('recent');
   const handleData = async (value) => {
     const res = await fetch(
-      `https://blog-frnt.vercel.app/api/blogapi?specificCategory=${value}`
+      `http://localhost:3000/api/blogapi?specificCategory=${value}`
     );
     if (!res.ok) {
       // throw new Error(`Error: ${res.status} ${res.statusText}`);
