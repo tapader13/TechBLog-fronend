@@ -92,12 +92,12 @@ Visit **[http://localhost:3000](http://localhost:3000)** to see the app in actio
 ---
 
 ## Live Demo & Resources  
-🚀 **Live Project:** [Your Deployed Link Here](#)  
+🚀 **Live Project:** [Your Deployed Link Here](https://blog-frnt.vercel.app/)(#)  
 
 ---
 
 👨‍💻 **Contributions are welcome!** Feel free to submit issues or pull requests.  
-📩 **Have questions?** Contact me at [your-email@example.com](mailto:your-email@example.com).  
+📩 **Have questions?** Contact me at [minhajtapader0@gmail.com](mailto:minhajtapader0@gmail.com).  
 
 ---
 
