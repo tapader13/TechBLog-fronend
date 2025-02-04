@@ -1,4 +1,4 @@
-# Blog Front-End  
+# TechBLog  
 
 ## Overview  
 **Blog Front-End** is a technology-focused blogging platform that delivers insightful articles on web development topics such as JavaScript, React, and Node.js. Users can browse trending and latest posts, like and bookmark articles, and filter content by categories.  
@@ -92,7 +92,7 @@ Visit **[http://localhost:3000](http://localhost:3000)** to see the app in actio
 ---
 
 ## Live Demo & Resources  
-🚀 **Live Project:** [Your Deployed Link Here](https://blog-frnt.vercel.app/)(#)  
+🚀 **Live Project:** [Deployed Link Here](https://blog-frnt.vercel.app/)(#)  
 
 ---
 
