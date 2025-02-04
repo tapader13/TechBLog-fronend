@@ -6,8 +6,7 @@
 ---
 
 ## Screenshot  
-![Blog Front-End Screenshot](https://via.placeholder.com/1200x600?text=Project+Screenshot)  
-*(Replace with an actual screenshot of your project.)*  
+![https://via.placeholder.com/1200x600?text=Project+Screenshot](https://i.postimg.cc/NFg4ncPT/Screenshot-2025-02-05-021523.png) 
 
 ---
 
@@ -60,9 +59,6 @@
   "zustand": "^5.0.3"
 }
 ```
-**Dev Dependencies:**  
-- PostCSS  
-- TailwindCSS  
 
 ---
 
@@ -70,7 +66,7 @@
 
 ### 1️⃣ Clone the Repository  
 ```sh
-git clone https://github.com/yourusername/blog-frontend.git
+git clone https://github.com/tapader13/blog-frontend.git
 cd blog-frontend
 ```
 
@@ -97,8 +93,6 @@ Visit **[http://localhost:3000](http://localhost:3000)** to see the app in actio
 
 ## Live Demo & Resources  
 🚀 **Live Project:** [Your Deployed Link Here](#)  
-📜 **API Documentation:** [API Docs (if any)](#)  
-📚 **Additional Resources:** [Blog, Guides, or References](#)  
 
 ---
 
